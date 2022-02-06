@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useAuth } from '../context/authContext'
 import { db } from '../firebase/firebase'
-import { collection, getDoc, doc } from 'firebase/firestore'
+import { getDoc, doc } from 'firebase/firestore'
 
 export const Home = () => {
     const [tasks, setTaks] = useState([]);
     const { user, logout, loading } = useAuth()
-
 
 
     const hundleLogout = async () => {
@@ -17,13 +16,13 @@ export const Home = () => {
 
         const getTask = async () => {
 
-            const docRef = doc(db, "taks", "XVySWeUDRIhBZCsETpTa")
+            const docRef = doc(db, "taks", user.uid)
             const docSnap = await getDoc(docRef)
 
             setTaks(docSnap.data().tasks)
         }
         getTask()
-    }, []);
+    }, [user]);
 
 
 
