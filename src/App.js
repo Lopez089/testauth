@@ -5,6 +5,7 @@ import { Register } from './page/register'
 import { AuthProvider } from './context/authContext'
 import { ProtectedRouter } from 'page/protectedRouter';
 import { Dashboard } from 'page/dashboard'
+import { LayoutAuth } from 'layout/layoutAuth'
 
 function App() {
   return (
@@ -30,8 +31,21 @@ function App() {
                 </ProtectedRouter>
               }
             />
-            <Route path='/login' element={<Login />} />
-            <Route path='/register' element={<Register />} />
+            <Route
+              path='/login'
+              element={
+                <LayoutAuth>
+                  <Login />
+                </LayoutAuth>
+              } />
+            <Route
+              path='/register'
+              element={
+                <LayoutAuth>
+                  <Register />
+                </LayoutAuth>
+              }
+            />
           </Routes>
         </AuthProvider>
       </header>
